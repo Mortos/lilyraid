@@ -4,17 +4,17 @@ class ListPosition < ActiveRecord::Base
 
   default_scope order('position')
 
-  scope :in_raid, lambda do |raid|
+  def in_raid(raid)
     includes(:account => {:characters => :signups}).where('signups.raid_id' => raid.id)
   end
 
-  scope :for_account, lambda do |account|
+  def for_account(account)
     where(:account_id => account)
   end
 
-  scope :seated_in, lambda do |raid|
-    includes(:account => {:characters => {:signups => :slot}})
-      .where('signups.raid_id = ? and slots.id is not null', raid.id)
+  def seated_in(raid)
+    includes(:account => {:characters => {:signups => :slot}}).
+      where('signups.raid_id = ? and slots.id is not null', raid.id)
   end
 
   def after_destroy

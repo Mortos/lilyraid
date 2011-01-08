@@ -25,21 +25,10 @@ class Raid < ActiveRecord::Base
 
   has_many :logs
 
-  scope :past, lambda do
-    where('raids.date < ?', Date.today)
-  end
-
-  scope :last_month, lambda do
-    where('raids.date >= ?', Date.today - 1.month)
-  end
-
-  scope :last_three_month, lambda do
-    where('raids.date >= ?', Date.today - 3.months)
-  end
-
-  scope :in_instance, lambda do |instance|
-    where(:instance_id => instance)
-  end
+  scope :past, lambda { where('raids.date < ?', Date.today) }
+  scope :last_month, lambda { where('raids.date >= ?', Date.today - 1.month) }
+  scope :last_three_month, lambda { where('raids.date >= ?', Date.today - 3.months) }
+  scope :in_instance, lambda { |instance| where(:instance_id => instance) }
 
   # Validation
   validates_presence_of :name

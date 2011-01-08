@@ -41,12 +41,12 @@ Lilyraid::Application.routes.draw do
     resources :tags
   end
 
-  match 'wowhead/:search' => 'loots#search', :as => :wowhead
+  match 'wowhead/:search' => 'loots#search', :as => 'wowhead'
   match 'roles/:id' => 'characters#roles'
 
-  match 'login' => 'login#index', :as => :login, :via => get
-  match 'login' => 'login#login', :as => :login_post, :via => post
-  match 'logout' => 'login#logout', :as => :logout, :via => get
+  match 'login' => 'login#index', :as => 'login', :via => :get
+  match 'login' => 'login#login', :as => 'login_post', :via => :post
+  match 'logout' => 'login#logout', :as => 'logout', :via => :get
 
-  match '/' => 'raids#index'
+  root :to => 'raids#index'
 end

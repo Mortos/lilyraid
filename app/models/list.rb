@@ -3,7 +3,7 @@ class List < ActiveRecord::Base
   has_many :accounts, :through => :list_positions
   has_one :loot
 
-  default_scope :conditons => { "lists.name" => CONFIG[:guild] }
+  default_scope where('lists.name' => CONFIG[:guild])
 
   def self.get_list(name)
     List.includes({ :list_positions => { :account => { :characters => :cclass } } }).where('lists.name = ? and date is null', name).order('list_positions.position').first
@@ -14,10 +14,9 @@ class List < ActiveRecord::Base
                       :account => {
                         :characters => [:cclass,
                                         { :signups => {
-                                            :slot => :raid }}]}}})
-      .where('lists.name = ? and lists.date is null and raids.id = ?', name, raid.id)
-      .order('list_positions.position')
-      .first
+                                            :slot => :raid }}]}}}).
+      where('lists.name = ? and lists.date is null and raids.id = ?', name, raid.id).
+      order('list_positions.position').first
   end
 
   def cclasses
@@ -66,8 +65,8 @@ class List < ActiveRecord::Base
       position = account_lp.position
 
       self.list_positions.where('account_id in (?) and position > ?',
-                                raid.slots.in_term(slot.team).includes(:signup => {:character => :account}).all
-                                  .map(&:signup).compact.map(&:character).map(&:account).map(&:id),
+                                raid.slots.in_term(slot.team).includes(:signup => {:character => :account}).all.
+                                map(&:signup).compact.map(&:character).map(&:account).map(&:id),
                                 position).order('position').all.each do |lp|
         temp = lp.position
         lp.position = position
