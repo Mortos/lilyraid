@@ -13,15 +13,15 @@ class Account < ActiveRecord::Base
   # Make sure all characters can be deleted
   before_destroy :can_delete?
 
-  named_scope(:admins,
-              :include => { :characters => [:account, :cclass, :race] },
-              :conditions => { :admin => true },
-              :order => "accounts.name, characters.level desc, characters.name")
+  scope(:admins,
+        :include => { :characters => [:account, :cclass, :race] },
+        :conditions => { :admin => true },
+        :order => "accounts.name, characters.level desc, characters.name")
 
-  named_scope(:members,
-              :include => { :characters => [:account, :cclass, :race] },
-              :conditions => { :admin => false },
-              :order => "accounts.name, characters.level desc, characters.name")
+  scope(:members,
+        :include => { :characters => [:account, :cclass, :race] },
+        :conditions => { :admin => false },
+        :order => "accounts.name, characters.level desc, characters.name")
 
   @@mysql = nil
 

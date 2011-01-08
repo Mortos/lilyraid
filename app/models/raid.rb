@@ -25,9 +25,9 @@ class Raid < ActiveRecord::Base
 
   has_many :logs
 
-  named_scope :past, :conditions => ['raids.date < ?', Date.today]
-  named_scope :last_month, :conditions => ['raids.date >= ?', Date.today - 1.month]
-  named_scope :last_three_months, :conditions => ['raids.date >= ?', Date.today - 3.months]
+  scope :past, :conditions => ['raids.date < ?', Date.today]
+  scope :last_month, :conditions => ['raids.date >= ?', Date.today - 1.month]
+  scope :last_three_months, :conditions => ['raids.date >= ?', Date.today - 3.months]
 
   # Validation
   validates_presence_of :name

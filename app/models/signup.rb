@@ -9,26 +9,26 @@ class Signup < ActiveRecord::Base
 
   default_scope :order => 'signups.created_at'
 
-  named_scope :from_account, lambda { |account| {
+  scope :from_account, lambda { |account| {
       :include => :character,
       :conditions => { 'characters.account_id' => account } } }
 
-  named_scope :past, :include => :raid, :conditions => ['raids.date < ?', Date.today]
-  named_scope :last_month, :include => :raid, :conditions => ['raids.date >= ?', Date.today - 1.month]
-  named_scope :last_three_months, :include => :raid, :conditions => ['raids.date >= ?', Date.today - 3.months]
+  scope :past, :include => :raid, :conditions => ['raids.date < ?', Date.today]
+  scope :last_month, :include => :raid, :conditions => ['raids.date >= ?', Date.today - 1.month]
+  scope :last_three_months, :include => :raid, :conditions => ['raids.date >= ?', Date.today - 3.months]
 
-  named_scope :in_raid, lambda { |raid| {
+  scope :in_raid, lambda { |raid| {
       :conditions => ["signups.raid_id = ?", raid.id] } }
 
-  named_scope :waiting_list, {
+  scope :waiting_list, {
     :include => :slot,
     :conditions => "slots.id is null" }
 
-  named_scope :seated, {
+  scope :seated, {
     :include => :slot,
     :conditions => "slots.id is not null" }
 
-  named_scope :not_in_loot_list, {
+  scope :not_in_loot_list, {
     :include => :character,
     :conditions => ["not exists (select 1
                                    from list_positions lp

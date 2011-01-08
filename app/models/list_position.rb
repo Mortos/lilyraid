@@ -4,22 +4,16 @@ class ListPosition < ActiveRecord::Base
 
   default_scope :order => "position"
 
-  named_scope :in_raid, lambda { |raid| {
+  scope :in_raid, lambda { |raid| {
       :include => { :account => { :characters => :signups } },
-      :conditions => ["signups.raid_id = ?", raid.id]
-    }
-  }
+      :conditions => ["signups.raid_id = ?", raid.id] } }
 
-  named_scope :for_account, lambda { |account| {
-      :conditions => { :account_id => account }
-    }
-  }
+  scope :for_account, lambda { |account| {
+      :conditions => { :account_id => account } } }
 
-  named_scope :seated_in, lambda { |raid| {
+  scope :seated_in, lambda { |raid| {
       :include => { :account => { :characters => { :signups => :slot } } },
-      :conditions => ["signups.raid_id = ? and slots.id is not null", raid.id]
-    }
-  }
+      :conditions => ["signups.raid_id = ? and slots.id is not null", raid.id] } }
 
   def after_destroy
     new_position = self.position
