@@ -1,6 +1,6 @@
 source :gemcutter
 
-gem "rails", "2.3.11"
+gem "rails", "3.0.3"
 
 gem "mysql"
 gem "dbi"
