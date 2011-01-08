@@ -42,8 +42,9 @@ namespace :deploy do
 
   desc "Symlink database and config files"
   task :symlink_shared, :roles => :app do
-    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-    run "ln -nfs #{shared_path}/config/config.yml #{release_path}/config/config.yml"
+    ['database.yml', 'config.yml', 'initializers/secret_token.rb', 'initializers/session_store.rb'].each do |path|
+      run "ln -nfs #{shared_path}/config/#{path} #{release_path}/config/#{path}"
+    end
   end
 end
 
