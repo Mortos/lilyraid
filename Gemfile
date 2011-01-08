@@ -15,6 +15,9 @@ gem 'httparty'
 # Haml and Sass
 gem 'haml'
 
+# jQuery
+gem 'jquery-rails', '>= 0.2.6'
+
 # Deployment
 group :development do
   gem 'capistrano'

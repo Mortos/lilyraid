@@ -2,14 +2,23 @@ Lilyraid::Application.routes.draw do
   resources :lists
   resource :calendar
   resources :accounts do
+    member do
+      post :add_to_list
+      post :remove_from_list
+    end
+
     resources :characters do
       member do
-    get :roles
+        get :roles
       end
     end
   end
 
   resources :raids do
+    member do
+      post :finalize
+    end
+
     resources :signups do
       member do
         post :preferred

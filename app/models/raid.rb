@@ -27,7 +27,7 @@ class Raid < ActiveRecord::Base
 
   scope :past, lambda { where('raids.date < ?', Date.today) }
   scope :last_month, lambda { where('raids.date >= ?', Date.today - 1.month) }
-  scope :last_three_month, lambda { where('raids.date >= ?', Date.today - 3.months) }
+  scope :last_three_months, lambda { where('raids.date >= ?', Date.today - 3.months) }
   scope :in_instance, lambda { |instance| where(:instance_id => instance) }
 
   # Validation

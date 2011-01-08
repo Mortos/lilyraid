@@ -4,15 +4,15 @@ class ListPosition < ActiveRecord::Base
 
   default_scope order('position')
 
-  def in_raid(raid)
+  def self.in_raid(raid)
     includes(:account => {:characters => :signups}).where('signups.raid_id' => raid.id)
   end
 
-  def for_account(account)
+  def self.for_account(account)
     where(:account_id => account)
   end
 
-  def seated_in(raid)
+  def self.seated_in(raid)
     includes(:account => {:characters => {:signups => :slot}}).
       where('signups.raid_id = ? and slots.id is not null', raid.id)
   end
