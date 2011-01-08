@@ -1,9 +1,11 @@
-config/database.yml
-config/config.yml
+.bundle
 db/*.sqlite3
+log/*.log
+tmp/**/*
+
+# Cached
+public/stylesheets/raid.css
+
+# Doc
 doc/api
 doc/app
-log/*.log
-public/stylesheets/raid.css
-tmp/*
-.bundle

@@ -1,8 +1,6 @@
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 
-require 'dbi'
-
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
 
@@ -10,7 +8,7 @@ class ApplicationController < ActionController::Base
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => '599f44b29c4a78b118884b977571fb10'
 
-  if RAILS_ENV == 'development'
+  if Rails.env == 'development'
     before_filter :fake_authorize
   else
     before_filter :authorize

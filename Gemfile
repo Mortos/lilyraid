@@ -1,17 +1,17 @@
-source :gemcutter
+source 'http://rubygems.org'
 
-gem "rails", "3.0.3"
+gem 'rails', '3.0.3'
 
-gem "mysql"
-gem "dbi"
-gem "tzinfo"
+# Accounts from phpbb
+gem 'mysql'
+gem 'tzinfo'
 
-gem "icalendar"
-gem "will_paginate"
-gem "httparty"
+gem 'icalendar'
+gem 'will_paginate'
+gem 'httparty'
 
 group :development do
-  gem "sqlite3-ruby"
-  gem "capistrano"
-  gem "capistrano-ext"
+  gem 'capistrano'
+  gem 'capistrano-ext'
+  gem 'sqlite3-ruby', :require => 'sqlite3'
 end

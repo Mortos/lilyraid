@@ -1,6 +1,6 @@
-<% div_for(@raid) do %>
+<%= div_for(@raid) do %>
   <h3>Edit Raid</h3>
-  <% form_for(@raid) do |f| %>
+  <%= form_for(@raid) do |f| %>
     <dl>
       <dt>Name:</dt><dd><%= f.text_field :name %></dd>
       <dt>Date:</dt>
@@ -14,7 +14,7 @@
         <ul id="locations">
           <% @raid.locations.each do |location| %>
             <li>
-              <% f.fields_for :locations, location do |l| %>
+              <%= f.fields_for :locations, location do |l| %>
                 <% if l.object.new_record? or l.object.instance.active %>
                   <%= l.collection_select(:instance_id,
                                           l.object.new_record? ? (Instance.active - @raid.instances) : Instance.active,
@@ -46,7 +46,7 @@
             <dt>Group <%= cycle(*(1..8).to_a) %></dt>
             <% group.each do |slot| -%>
               <dd>
-                <% f.fields_for :slots, slot do |s| -%>
+                <%= f.fields_for :slots, slot do |s| -%>
                   <%= s.collection_select(:role_id, @roles, :id, :name, { :include_blank => "Any" }, { :class => 'slot_select' })%>
                   <%= s.collection_select(:cclass_id, @cclasses, :id, :name, { :include_blank => "Any" }, { :class => 'slot_select' }) %><br/>
                 <% end -%>
@@ -75,7 +75,7 @@
   <% end %>
 <% end %>
 
-<% javascript_tag do %>
+<%= javascript_tag do %>
 $('#caldate').datepicker();
 $('#caltime').timepickr({ convention: 12, val: '<%= @raid.caltime %>', rangeMin: ['00', '30'], suffix: ['pm', 'am']});
 <% end %>

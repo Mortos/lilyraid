@@ -1,4 +1,4 @@
-require 'bundler/capistrano'
+require "bundler/capistrano"
 
 set :stages, %w(cod dota)
 require 'capistrano/ext/multistage'
@@ -21,10 +21,10 @@ set :deploy_via, :remote_cache
 
 set :user, 'kelsin'
 set :ssh_options, { :forward_agent => true }
- 
-role :app, "valefor.com"
-role :web, "valefor.com"
-role :db,  "valefor.com", :primary => true
+
+role :app, "kelsin.net"
+role :web, "kelsin.net"
+role :db,  "kelsin.net", :primary => true
 
 namespace :deploy do
   task :start, :roles => :app do

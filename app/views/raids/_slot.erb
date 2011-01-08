@@ -1,5 +1,5 @@
 <% if slot.signup %>
-  <% content_tag_for(:dd, slot, :class => slot.signup.classes) do %>
+  <%= content_tag_for(:dd, slot, :class => slot.signup.classes) do %>
     <%= render(:partial => "shared/character", :object => slot.signup.character) %>
     <%= "*" if slot.signup.has_other_signups %>
     <% if slot.team > 1 %><span class="team"><%= slot.team %></span><% end %>
@@ -9,7 +9,7 @@
     </div>
   <% end %>
 <% else %>
-  <% content_tag_for(:dd, slot) do %>
+  <%= content_tag_for(:dd, slot) do %>
     <%= render(:partial => "shared/slot", :object => slot) %>
     <% if slot.team > 1 %><span class="team"><%= slot.team %></span><% end %>
     <div class="note">

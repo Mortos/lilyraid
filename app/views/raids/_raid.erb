@@ -24,11 +24,10 @@
   <td>
     <% if @current_account.can_edit?(raid) && raid.can_be_deleted? %>
       <span id="loader_<%= raid.id %>">
-        <%= link_to_remote "Delete",
-            :url => raid_url(raid),
+        <%= link_to "Delete", raid_url(raid), :remote => true,
             :confirm=>"Are you sure you want to delete #{raid.name}?",
-            :method => :delete, 
-            :loading => update_page{|page| 
+            :method => :delete,
+            :loading => update_page{|page|
                 page["loader_#{raid.id}"].replace_html image_tag("loading.gif")
             } %>
       </span>

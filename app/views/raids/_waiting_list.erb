@@ -1,6 +1,6 @@
 <dt>Waiting List</dt>
 <% waiting_list.each do |signup| %>
-  <% content_tag_for(:dd, signup, :class => signup.classes(false)) do %>
+  <%= content_tag_for(:dd, signup, :class => signup.classes(false)) do %>
     <%= "<strong>" if signup.preferred? %>
       <%= render(:partial => "shared/character", :object => signup.character) %>
     <%= "</strong>" if signup.preferred? %>

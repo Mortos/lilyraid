@@ -2,7 +2,7 @@
   <p style="color: red;"><%= flash[:error] %></p>
 <%- end -%>
 
-<%- div_for(@raid) do -%>
+<%= div_for(@raid) do %>
   <h3><%= @raid.name %></h3>
   <%- if @current_account.can_edit?(@raid) -%>
     <p><%= link_to("Edit Raid Info", edit_raid_url(@raid)) -%></p>
@@ -81,7 +81,7 @@
         <% if @raid.started? %>
           This raid has already started, sign ups are closed!
         <% else %>
-          <% form_for([@raid, Signup.new(:note => "Note")]) do |f| %>
+          <%= form_for([@raid, Signup.new(:note => "Note")]) do |f| %>
             <div>
               <%= f.collection_select(:character_id,
                                       @current_account.characters.active.not_signed_up_for(@raid),
@@ -126,7 +126,7 @@
             <dl class="list" id="add_to_loot_list" <%= "style=\"display: none;\"" unless @raid.signups.not_in_loot_list.seated.count > 0 %>>
               <dt>Add to Loot List</dt>
               <% @raid.signups.not_in_loot_list.each do |signup| %>
-                <% content_tag_for(:dd, signup.character, :class => signup.classes) do %>
+                <%= content_tag_for(:dd, signup.character, :class => signup.classes) do %>
                   <%= link_to(render(:partial => "shared/character", :object => signup.character),
                               add_to_list_account_url(signup.character.account),
                               :onclick => "if(confirm('Are you sure you want to add #{signup.character.account.name} to the loot list?')) { $.post('#{add_to_list_account_url(signup.character.account)}', { raid_id: '#{@raid.id}', authenticity_token: AUTH_TOKEN }, null, 'script'); } return false;") %>
@@ -163,7 +163,7 @@
         <% if Character.not_signed_up_for(@raid).count > 0 %>
           <dt>Add Signup:</dt>
           <dd id="admin_new_signup">
-            <% form_for([@raid, Signup.new(:note => "Note")]) do |f| %>
+            <%= form_for([@raid, Signup.new(:note => "Note")]) do |f| %>
               <div>
                 <%= f.collection_select(:character_id,
                                         Character.not_signed_up_for(@raid),
@@ -311,7 +311,7 @@
   </dl>
 <%- end # div_for @raid -%>
 
-<% javascript_tag do %>
+<%= javascript_tag do %>
 var raid_id = <%= @raid.id %>;
 
 $(document).ready(function() {
