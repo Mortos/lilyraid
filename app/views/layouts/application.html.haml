@@ -4,7 +4,7 @@
     %title= @title || CONFIG[:guild] + " Raid Signups" || "World of Warcraft Raid Signup"
     = favicon_link_tag "#{Rails.env}-favicon.png", :type => 'image/png'
     = stylesheet_link_tag 'lilyraid', Rails.env, 'jquery', 'jquery.timepicker'
-    = javascript_include_tag :all
+    = javascript_include_tag :defaults
     = csrf_meta_tag
     = javascript_tag do
       var AUTH_TOKEN = '#{form_authenticity_token}';

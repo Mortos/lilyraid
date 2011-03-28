@@ -1,6 +1,6 @@
 module ApplicationHelper
-  def admin?
-    @current_account.admin?
+  def admin?(raid = nil)
+    raid ? @current_account.can_edit?(raid) : @current_account.admin?
   end
 
   def current_account_path

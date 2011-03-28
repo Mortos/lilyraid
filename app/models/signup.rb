@@ -37,6 +37,10 @@ class Signup < ActiveRecord::Base
 
   before_save :remove_default_note
 
+  def to_s
+    self.character.to_s
+  end
+
   def classes(others = true)
     c = Array.new
     c.push("signup")
@@ -88,7 +92,7 @@ class Signup < ActiveRecord::Base
     raid.signups_from(character.account) - [self]
   end
 
-  def has_other_signups
+  def has_other_signups?
     other_signups.size > 0
   end
 

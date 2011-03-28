@@ -38,6 +38,10 @@ class Character < ActiveRecord::Base
                                   where lp.account_id = characters.account_id
                                     and lp.list_id = ?)", List.first ? List.first.id : 0] }
 
+  def to_s
+    self.name
+  end
+
   def name_with_level
     "#{name} (#{level})"
   end

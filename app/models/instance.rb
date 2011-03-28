@@ -10,4 +10,8 @@ class Instance < ActiveRecord::Base
   validates_uniqueness_of :name
 
   default_scope :order => 'instances.name'
+
+  def to_s
+    self.name
+  end
 end

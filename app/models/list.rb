@@ -5,6 +5,10 @@ class List < ActiveRecord::Base
 
   default_scope where('lists.name' => CONFIG[:guild])
 
+  def to_s
+    self.name
+  end
+
   def self.get_list(name)
     List.includes({ :list_positions => { :account => { :characters => :cclass } } }).where('lists.name = ? and date is null', name).order('list_positions.position').first
   end

@@ -30,6 +30,10 @@ class Raid < ActiveRecord::Base
   scope :last_three_months, lambda { where('raids.date >= ?', Date.today - 3.months) }
   scope :in_instance, lambda { |instance| where(:instance_id => instance) }
 
+  def to_s
+    self.name
+  end
+
   # Validation
   validates_presence_of :name
 
