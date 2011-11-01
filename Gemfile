@@ -14,8 +14,10 @@ gem 'httparty'
 
 # Haml and Sass
 gem 'haml'
-gem 'slim', :require => 'slim/rails'
+gem 'slim'
 gem 'jammit'
+
+gem 'thin'
 
 # jQuery
 gem 'jquery-rails', '>= 0.2.6'
