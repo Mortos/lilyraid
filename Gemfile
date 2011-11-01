@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 # Rails
-gem 'rails', '3.0.3'
+gem 'rails', '3.1.1'
 
 # Accounts from phpbb
 gem 'mysql'
@@ -15,7 +15,6 @@ gem 'httparty'
 # Haml and Sass
 gem 'haml'
 gem 'slim'
-gem 'jammit'
 
 gem 'thin'
 gem 'airbrake'
@@ -27,5 +26,5 @@ gem 'jquery-rails', '>= 0.2.6'
 group :development do
   gem 'capistrano'
   gem 'capistrano-ext'
-  gem 'sqlite3-ruby', :require => 'sqlite3'
+  gem 'sqlite3', :require => 'sqlite3'
 end
