@@ -18,6 +18,7 @@ gem 'slim'
 gem 'jammit'
 
 gem 'thin'
+gem 'airbrake'
 
 # jQuery
 gem 'jquery-rails', '>= 0.2.6'

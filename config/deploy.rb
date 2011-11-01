@@ -42,7 +42,7 @@ namespace :deploy do
 
   desc "Symlink database and config files"
   task :symlink_shared, :roles => :app do
-    ['database.yml', 'config.yml', 'initializers/secret_token.rb', 'initializers/session_store.rb'].each do |path|
+    ['database.yml', 'config.yml', 'initializers/airbrake.rb', 'initializers/secret_token.rb', 'initializers/session_store.rb'].each do |path|
       run "ln -nfs #{shared_path}/config/#{path} #{release_path}/config/#{path}"
     end
   end
@@ -53,3 +53,6 @@ after 'deploy:update_code', 'deploy:symlink_shared'
 Dir[File.join(File.dirname(__FILE__), '..', 'vendor', 'gems', 'hoptoad_notifier-*')].each do |vendored_notifier|
   $: << File.join(vendored_notifier, 'lib')
 end
+
+        require './config/boot'
+        require 'airbrake/capistrano'
